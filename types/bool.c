@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include "bool.h"
-#include "macros.h"
 
 bool String_To_Bool( char *str )
 {
