@@ -67,7 +67,7 @@ clean:
 #
 
 static:
-	ar rcs $(LIBRARY_PATH)/lib$(PROJCET).a $(OBJECTS)
+	ar rcs $(LIBRARY_PATH)/lib$(PROJECT).a $(OBJECTS)
 
 
 #
