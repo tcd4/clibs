@@ -8,7 +8,7 @@
 # Object Files
 #
 
-OBJECTS = $(pathsubst %.c, %.o,$(wildcard *.c))
+OBJECTS = $(patsubst %.c,%.o,$(wildcard *.c))
 
 
 #
