@@ -164,7 +164,7 @@ DList* New_DList();
  *
  * @return a pointer to the DList or NULL on failure
  */
-DList* Append_To_DList( DList *list );
+DList* Append_To_DList( DList *list, dataptr data );
 
 /**
  * @brief prepends data to a DList
@@ -174,7 +174,7 @@ DList* Append_To_DList( DList *list );
  *
  * @return a pointer to the new DList head or NULL on failure
  */
-DList* Prepend_To_DList( DList *list );
+DList* Prepend_To_DList( DList *list, dataptr data );
 
 /**
  * @brief removes a segment from a DList
@@ -246,7 +246,7 @@ void Free_DList_Segment( DList *seg );
  *
  * @param list a pointer to the DList pointer of the DList to free
  */
-void Free_DList( DList *list );
+void Free_DList( DList **list );
 
 
 #endif
