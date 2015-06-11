@@ -17,8 +17,9 @@ START_DECLS
 
 typedef struct
 {
-    dataptr   data;     /*< the data the array contains */
-    uint64    lenght;   /*< the length of the array */
+    dataptr   *data;                       /*< the data the array contains */
+    uint64    length;                      /*< the length of the array */
+    void      ( *Free )( dataptr data );   /*< custom free function for data */
 }DArray;
 
 
@@ -30,7 +31,7 @@ typedef struct
  *
  * @return a new DArray
  */
-DArray* New_DArray( uint64 size, dataptr free );
+DArray* New_DArray( uint64 size, void ( *free )() );
 
 /**
  * @brief expands/contracts the size of a DArray
