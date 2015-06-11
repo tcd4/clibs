@@ -11,6 +11,10 @@
 #include "basics.h"
 #include "macros.h"
 
+
+START_DECLS
+
+
 /*< the singly linked list struct */
 typedef struct list_s
 {
@@ -248,5 +252,7 @@ void Free_DList_Segment( DList *seg );
  */
 void Free_DList( DList **list );
 
+
+END_DECLS
 
 #endif
