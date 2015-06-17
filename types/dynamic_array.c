@@ -45,7 +45,7 @@ DArray* Append_To_DArray( DArray *array, dataptr data )
     Resize_DArray( array, ++array->length );
     Return_Value_If_Fail( array, NULL );
 
-    memcpy( array->data[ array->length - 1 ], data, sizeof( dataptr );
+    array->data[ array->length - 1 ] = data;
     
     return array;
 }
@@ -53,16 +53,13 @@ DArray* Append_To_DArray( DArray *array, dataptr data )
 
 DArray* Prepend_To_DArray( DArray *array, dataptr data )
 {
-    uint64 i;
-    dataptr temp;
-
     Return_Value_If_Fail( array, NULL );
 
     Resize_DArray( array, array->length + 1 );
     Return_Value_If_Fail( array, NULL );
 
-    memmove( array->data + 1, array->data, array->length );
-    memcpy( array->data[ 0 ], data );
+    memmove( array->data + 1, array->data, sizeof( dataptr ) * ( array->length - 1 ) );
+    array->data[ 0 ] = data;
 
     return array;
 }
@@ -70,16 +67,69 @@ DArray* Prepend_To_DArray( DArray *array, dataptr data )
 
 DArray* Insert_To_DArray( DArray *array, dataptr data, uint64 index )
 {
+    Return_Value_If_Fail( array, NULL);
+
+    if( ( index < 0 ) || ( index >= array->length ) )
+    {
+	return NULL;
+    }
+
+    Resize_DArray( array, array->length + 1 );
+    Return_Value_If_Fail( array, NULL );
+
+    memmove( array->data + index + 1, array->data + index, sizeof( dataptr ) * ( array->length - index ) );
+
+    return array;
 }
 
 
 DArray* Remove_From_DArray( DArray *array, uint64 index )
 {
+    Return_Value_If_Fail( array, NULL);
+
+    if( ( index < 0 ) || ( index >= array->length ) )
+    {
+	return NULL;
+    }
+
+    if( array->Free )
+    {
+	array->Free( array->data[ index ] );
+    }
+
+    if( index != array->length - 1 )
+    {
+	memmove( array->data + index, array->data + index + 1, sizeof( dataptr ) * ( array->length - index - 1 ) );
+    }
+
+    Resize_DArray( array, array->length - 1 );
+    Return_Value_If_Fail( array, NULL );
+
+    return NULL;
 }
 
 
 void Free_DArray( DArray **array )
 {
+    DArray *temp;
+    uint64 i;
+
+    Return_If_Fail( array );
+    Return_If_Fail( *array );
+
+    temp = *array;
+
+    if( temp->Free )
+    {
+	for( i = 0; i < temp->length; i++ )
+	{
+	    if( temp->data[ i ] ) temp->Free( temp->data[ i ] );
+	}
+    }
+
+    free( temp->data );
+    free( temp );
+    *array = NULL;
 }
 
 
