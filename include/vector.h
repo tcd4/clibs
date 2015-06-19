@@ -9,9 +9,10 @@
 #define __VECTOR__
 
 
+#include <math.h>
 #include "basics.h"
-#include "macros.h"
 #include "basic_math.h"
+#include "macros.h"
 
 
 /* vector typedefs */

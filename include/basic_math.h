@@ -9,6 +9,9 @@
 #define __BASIC_MATH__
 
 
+#include <stdlib.h>
+
+
 #define PI 3.14159265
 #define TAU 6.283185308
 #define TODEG 57.2957795
