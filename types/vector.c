@@ -233,15 +233,25 @@ void Vec4_Set_Angle_Rads( vec4_t *v, float a )
 
 
 /* non-specific functions */
-/*
-float Get_Angle( float x, float y )
+
+float Get_Angle_Deg( float x, float y )
+{    
+    return Angle_To_Deg( atan2( y, x ) + PI );
+}
+
+
+float Get_Angle_Rad( float x, float y )
 {
+    return ( atan2( y, x ) + PI ) ;
 }
 
 
 void Cross_Product( vec3_t *out, vec3_t v1, vec3_t v2 )
 {
+    *out[ 0 ] = v1[ 1 ] * v2[ 2 ] - v1[ 2 ] * v2[ 1 ];
+    *out[ 1 ] = v1[ 2 ] * v2[ 0 ] - v1[ 0 ] * v2[ 2 ];
+    *out[ 2 ] = v1[ 0 ] * v2[ 1 ] - v1[ 1 ] * v2[ 0 ];
 }
-*/
+
 
 /*eof*/
