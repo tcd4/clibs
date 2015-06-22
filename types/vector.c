@@ -2,6 +2,7 @@
 
 
 /* 2d vector functions */
+
 void Vec2_Normalize( vec2_t *v )
 {
     float m;
@@ -153,41 +154,83 @@ void Vec3_Set_Angle_Rads( vec3_t *v, float a )
 
 
 /* 4d vector functions */
-/*
+
 void Vec4_Normalize( vec4_t *v )
 {
+    float m;
+
+    Return_If_Fail( v );
+
+    m = Vec4_Get_Magnitude( *v );
+    Return_If_Fail( m != 0.0f );
+    m = 1 / m;
+
+    *v[ 0 ] *= m;
+    *v[ 1 ] *= m;
+    *v[ 2 ] *= m;
+    *v[ 3 ] *= m;
 }
 
 
 float Vec4_Get_Magnitude( vec4_t v )
 {
+    return sqrt( v[ 0 ] * v[ 0 ] + v[ 1 ] * v[ 1 ] + v[ 2 ] * v[ 2 ] + v[ 3 ] * v[ 3 ] );
 }
 
 
 void Vec4_Set_Magnitude( vec4_t *v, float m )
 {
+    Return_If_Fail( v );
+
+    Vec4_Normalize( v );
+    
+    *v[ 0 ] *= m;
+    *v[ 1 ] *= m;
+    *v[ 2 ] *= m;
+    *v[ 3 ] *= m;
 }
 
 
 int8 Vec4_Magnitude_Compare( vec4_t v1, vec4_t v2 )
 {
+    float m1, m2;
+
+    m1 = Vec4_Get_Magnitude( v1 );
+    m2 = Vec4_Get_Magnitude( v2 );
+
+    if( m1 > m2 ) return 1;
+    else if( m1 < m2 ) return -1;
+    else return 0;
 }
 
 
 uint32 Vec4_Distance_Between( vec4_t v1, vec4_t v2 )
 {
+    Vec4_Subtract( v1, v2, v1 );
+
+    return abs( Vec4_Get_Magnitude( v1 ) );
 }
 
 
 void Vec4_Set_Angle_Degs( vec4_t *v, float a )
 {
+    Return_If_Fail( v );
+
+    a = Angle_To_Rad( a );
+
+    *v[ 0 ] = cos( a );
+    *v[ 1 ] = sin( a );
 }
 
 
 void Vec4_Set_Angle_Rads( vec4_t *v, float a )
 {
+    Return_If_Fail( v );
+
+    *v[ 0 ] = cos( a );
+    *v[ 1 ] = sin( a );
 }
-*/
+
 
 /* non-specific functions */
 /*
