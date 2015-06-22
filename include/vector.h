@@ -306,9 +306,19 @@ void Vec4_Set_Angle_Rads( vec4_t *v, float a );
  * @param x the length to use
  * @param y the height to use
  *
+ * @return an angle in degrees
+ */
+float Get_Angle_Deg( float x, float y );
+
+/**
+ * @brief calculates an angle from an x and a y
+ *
+ * @param x the length to use
+ * @param y the height to use
+ *
  * @return an angle in radians
  */
-float Get_Angle( float x, float y );
+float Get_Angle_Rad( float x, float y );
 
 /**
  * @brief calculates the cross product of 2 3d vectors
