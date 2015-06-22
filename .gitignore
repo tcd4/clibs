@@ -17,3 +17,7 @@
 
 # Backup Files
 *~
+
+# Unsaved Files
+*#
+.#*
