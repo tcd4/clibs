@@ -56,7 +56,7 @@ List* Remove_List_Segment( List *list, List *seg )
 {
     Return_Value_If_Fail( list, NULL );
 
-    while( list && ( list->next != seg ) )
+    while( list && ( list != seg ) )
     {
 	list = list->next;
     }
