@@ -67,13 +67,30 @@ void Clear_Queue( Queue *queue )
 bool Queue_Is_Empty( Queue *queue )
 {
     Return_Value_If_Fail( queue->length != 0, FALSE );
-    
     return TRUE;
 }
 
 
 Queue* Duplicate_Queue( Queue *queue )
 {
+    Queue *new;
+
+    Return_Value_If_Fail( queue, NULL );
+
+    new = New_Queue();
+    Return_Value_If_Fail( new, NULL );
+
+    new->head = Duplicate_List( queue->head );
+    if( !new->head )
+    {
+	Free_Queue( &new );
+	return NULL;
+    }
+
+    new->tail = End_Of_List( new->head );
+    new->length = queue->length;
+
+    return new;
 }
 
 
