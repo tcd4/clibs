@@ -18,7 +18,6 @@
 typedef struct
 {
     List     *head;    /*< the first element of the queue */
-    List     *tail;    /*< the last element of the queue */
     uint64   length;   /*< the length of the queue */
 }Queue;
 

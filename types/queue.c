@@ -9,7 +9,6 @@ Queue* New_Queue()
     Return_Value_If_Fail( new, NULL );
 
     new->head = NULL;
-    new->tail = NULL;
     new->length = 0;
 
     return new;
@@ -35,7 +34,6 @@ void Push_Queue( Queue *queue, dataptr data )
     }
 
     queue->head = new;
-    queue->tail = End_Of_List( queue->head );
     queue->length++;
 }
 
@@ -59,7 +57,6 @@ void Clear_Queue( Queue *queue )
 
     Free_List( &queue->head );
 
-    queue->tail = NULL;
     queue->length = 0;
 }
 
@@ -87,7 +84,6 @@ Queue* Duplicate_Queue( Queue *queue )
 	return NULL;
     }
 
-    new->tail = End_Of_List( new->head );
     new->length = queue->length;
 
     return new;
