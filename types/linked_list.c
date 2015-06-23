@@ -54,17 +54,26 @@ List* Prepend_To_List( List *list, dataptr data )
 
 List* Remove_List_Segment( List *list, List *seg )
 {
-    Return_Value_If_Fail( list, NULL );
+    List *temp;
 
-    while( list && ( list != seg ) )
+    Return_Value_If_Fail( list, NULL );
+    Return_Value_If_Fail( seg, list );
+
+    if( list == seg )
     {
-	list = list->next;
+	temp = list->next;
+	Free_List_Segment( list );
+	return temp;
     }
+    
+    while( temp && ( temp->next != seg ) )
+    {
+	temp = temp->next;
+    }
+    
+    Return_Value_If_Fail( temp, list );
 
-    /* segment was not in the list */
-    Return_Value_If_Fail( list, NULL );
-
-    list->next = seg->next;
+    temp->next = seg->next;
 
     Free_List_Segment( seg );
 
@@ -250,17 +259,26 @@ DList* Prepend_To_DList( DList *list, dataptr data )
 
 DList* Remove_DList_Segment( DList *list, DList *seg )
 {
-    Return_Value_If_Fail( list, NULL );
+    DList *temp;
 
-    while( list && ( list->next != seg ) )
+    Return_Value_If_Fail( list, NULL );
+    Return_Value_If_Fail( seg, list );
+
+    if( list == seg )
     {
-	list = list->next;
+	temp = list->next;
+	Free_DList_Segment( list );
+	return temp;
     }
+    
+    while( temp && ( temp->next != seg ) )
+    {
+	temp = temp->next;
+    }
+    
+    Return_Value_If_Fail( temp, list );
 
-    /* segment was not in the list */
-    Return_Value_If_Fail( list, NULL );
-
-    list->next = seg->next;
+    temp->next = seg->next;
 
     Free_DList_Segment( seg );
 
