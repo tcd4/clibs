@@ -77,7 +77,7 @@ Queue* Duplicate_Queue( Queue *queue );
  *
  * @param queue the Queue to use
  */
-void Free_Queue( Queue *queue );
+void Free_Queue( Queue **queue );
 
 
 #endif
