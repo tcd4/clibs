@@ -70,7 +70,7 @@ void Clear_Stack( Stack *stack )
 bool Stack_Is_Empty( Stack *stack )
 {
     Return_Value_If_Fail( stack, FALSE );
-    Return_Value_If_Fail( stack->length <= 0, FALSE );
+    Return_Value_If_Fail( ( stack->length > 0 ) || ( stack->length < 0 ), FALSE );
     return TRUE;
 }
 
