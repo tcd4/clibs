@@ -18,25 +18,25 @@ Stack* New_Stack()
 
 void Push_Stack( Stack *stack, dataptr data )
 {
-    DList *new;
+    List *new;
 
     Return_If_Fail( stack );
 
     if( !stack->head )
     {
-	new = New_DList();
+	new = New_List();
 	Return_If_Fail( new );
 
 	new->data = data;
     }
     else
     {
-	new = Append_To_DList( stack->head, data );
+	new = Append_To_List( stack->head, data );
 	Return_If_Fail( new );
     }
 
     stack->head = new;
-    stack->tail = End_Of_DList( new );
+    stack->tail = End_Of_List( new );
     stack->length++;
 }
 
@@ -49,7 +49,7 @@ dataptr Pop_Stack( Stack *stack )
 
     temp = stack->tail->data;
 
-    stack->head = Remove_DList_Segment( stack->head, stack->tail );
+    stack->head = Remove_List_Segment( stack->head, stack->tail );
     stack->length--;
 
     return temp;
@@ -60,7 +60,7 @@ void Clear_Stack( Stack *stack )
 {
     Return_If_Fail( stack );
 
-    Free_DList( &stack->head );
+    Free_List( &stack->head );
    
     stack->tail = NULL;
     stack->length = 0;
@@ -92,8 +92,8 @@ Stack* Duplicate_Stack( Stack *stack )
 	    return NULL;
 	}
 
-	new->head = Duplicate_DList( stack->head );
-	new->tail = End_Of_DList( stack->head );
+	new->head = Duplicate_List( stack->head );
+	new->tail = End_Of_List( stack->head );
     }
     
     new->length = stack->length;
@@ -111,7 +111,7 @@ void Free_Stack( Stack **stack )
     temp = *stack;
     Return_If_Fail( temp );
 
-    Free_DList( &temp->head );
+    Free_List( &temp->head );
     free( temp );
     *stack = NULL;
 }

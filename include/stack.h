@@ -17,8 +17,8 @@
 /*< the stack struct */
 typedef struct
 {
-    DList    *head;    /*< the first element of the stack */
-    DList    *tail;    /*< the last element of the stack */
+    List    *head;    /*< the first element of the stack */
+    List    *tail;    /*< the last element of the stack */
     uint64   length;   /*< the number of elements in the stack */
 }Stack;
 
