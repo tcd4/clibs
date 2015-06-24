@@ -86,14 +86,14 @@ Stack* Duplicate_Stack( Stack *stack )
 
     if( !Stack_Is_Empty( stack ) )
     {
+	new->head = Duplicate_List( stack->head );
 	if( !new->head )
 	{
 	    Free_Stack( &new );
 	    return NULL;
 	}
 
-	new->head = Duplicate_List( stack->head );
-	new->tail = End_Of_List( stack->head );
+	new->tail = End_Of_List( new->head );
     }
     
     new->length = stack->length;
