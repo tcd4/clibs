@@ -63,7 +63,8 @@ void Clear_Queue( Queue *queue )
 
 bool Queue_Is_Empty( Queue *queue )
 {
-    Return_Value_If_Fail( queue->length != 0, FALSE );
+    Return_Value_If_Fail( queue, FALSE );
+    Return_Value_If_Fail( ( queue->length > 0 ) || ( queue->length < 0 ), FALSE );
     return TRUE;
 }
 
