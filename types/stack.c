@@ -70,8 +70,35 @@ void Clear_Stack( Stack *stack )
 bool Stack_Is_Empty( Stack *stack )
 {
     Return_Value_If_Fail( stack, FALSE );
-    Return_Value_If_Fail( ( stack->length > 0 ) || ( stack->length < 0 ), FALSE );
+    Return_Value_If_Fail( stack->head, FALSE );
     return TRUE;
+}
+
+
+Stack* Duplicate_Stack( Stack *stack )
+{
+    Stack *new;
+
+    Return_Value_If_Fail( stack, NULL );
+
+    new = New_Stack();
+    Return_Value_If_Fail( new, NULL );
+
+    if( !Stack_Is_Empty( stack ) )
+    {
+	if( !new->head )
+	{
+	    Free_Stack( &new );
+	    return NULL;
+	}
+
+	new->head = Duplicate_DList( stack->head );
+	new->tail = End_Of_DList( stack->head );
+    }
+    
+    new->length = stack->length;
+
+    return new;
 }
 
 
