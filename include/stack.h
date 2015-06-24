@@ -64,6 +64,15 @@ void Clear_Stack( Stack *stack );
 bool Stack_Is_Empty( Stack *stack );
 
 /**
+ * @brief duplicates a Stack
+ *
+ * @param stack the Stack to use
+ *
+ * @return returns a pointer to the duplicate Stack
+ */
+Stack* Duplicate_Stack( Stack *stack );
+
+/**
  * @brief frees the memory of a Stack
  *
  * @param stack the Stack to use
