@@ -42,6 +42,8 @@ dataptr Pop_Queue( Queue *queue )
 {
     dataptr temp;
 
+    Return_Value_If_Fail( queue, NULL );
+
     temp = queue->head->data;
 
     queue->head = Remove_List_Segment( queue->head, queue->head );
