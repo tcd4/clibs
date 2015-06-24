@@ -68,7 +68,7 @@ bool Stack_Is_Empty( Stack *stack );
  *
  * @param stack the Stack to use
  */
-void Free_Stack( Stack *stack );
+void Free_Stack( Stack **stack );
 
 
 #endif
