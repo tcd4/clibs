@@ -36,11 +36,11 @@ bool String_To_True( char *str )
 
 bool String_To_False( char *str )
 {
-    Return_Value_If_Fail( str, FALSE );
+    Return_Value_If_Fail( str, TRUE );
 
-    if( ( strcmp( str, "true" ) == 0 ) ||
-	( strcmp( str, "True" ) == 0 ) ||
-	( strcmp( str, "TRUE" ) == 0 ) )
+    if( ( strcmp( str, "false" ) == 0 ) ||
+	( strcmp( str, "False" ) == 0 ) ||
+	( strcmp( str, "FALSE" ) == 0 ) )
     {
 	return FALSE;
     }
