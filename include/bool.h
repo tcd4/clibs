@@ -17,7 +17,10 @@
 
 
 #include "basics.h"
+#include "macros.h"
 
+
+START_DECLS
 
 /**
  * @brief converts a string to a boolean value
@@ -62,4 +65,5 @@ bool String_To_False( char *str );
 char* Bool_To_String( bool b );
 
 
+END_DECLS
 #endif
