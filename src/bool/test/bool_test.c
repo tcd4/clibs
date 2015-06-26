@@ -1,0 +1,3 @@
+#include "bool.h"
+
+/*eof*/

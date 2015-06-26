@@ -15,7 +15,7 @@ OBJECTS = $(patsubst %.c,%.o,$(wildcard *.c))
 # Project Info
 #
 
-PROJECT = clib_types
+PROJECT = clib_Vector
 VERSION_MAJOR = 1
 VERSION_MINOR = 0.1
 
@@ -35,10 +35,10 @@ DOXYGEN = doxygen
 CC = gcc
 
 # library
-LIBRARY_PATH = ../libs
+LIBRARY_PATH = ../../../libs
 
 # includes
-INCLUDE_PATHS = ../include
+INCLUDE_PATHS = ../../../include
 INCLUDE_PARAMS = $(foreach d, $(INCLUDE_PATHS), -I$d)
 
 # compiler flags

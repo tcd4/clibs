@@ -8,14 +8,14 @@
 # Object Files
 #
 
-OBJECTS = $(pathsubst %.c, %.o,$(wildcard *.c))
+OBJECTS = $(patsubst %.c,%.o,$(wildcard *.c))
 
 
 #
 # Project Info
 #
 
-PROJECT = clib_utils
+PROJECT = clib_List
 VERSION_MAJOR = 1
 VERSION_MINOR = 0.1
 
@@ -35,10 +35,10 @@ DOXYGEN = doxygen
 CC = gcc
 
 # library
-LIBRARY_PATH = ../libs
+LIBRARY_PATH = ../../../libs
 
 # includes
-INCLUDE_PATHS = ../include
+INCLUDE_PATHS = ../../../include
 INCLUDE_PARAMS = $(foreach d, $(INCLUDE_PATHS), -I$d)
 
 # compiler flags
@@ -67,7 +67,7 @@ clean:
 #
 
 static:
-	ar rcs $(LIBRARY_PATH)/lib$(PROJCET).a $(OBJECTS)
+	ar rcs $(LIBRARY_PATH)/lib$(PROJECT).a $(OBJECTS)
 
 
 #
@@ -76,3 +76,4 @@ static:
 
 docs:
 	$(DOXYGEN) doxgen.cfg
+
