@@ -15,7 +15,7 @@ OBJECTS = $(patsubst %.c,%.o,$(wildcard *.c))
 # Project Info
 #
 
-PROJECT = clib_bool
+PROJECT = bool
 VERSION_MAJOR = 1
 VERSION_MINOR = 0.1
 
@@ -42,7 +42,7 @@ INCLUDE_PATHS = ../../../include
 INCLUDE_PARAMS = $(foreach d, $(INCLUDE_PATHS), -I$d)
 
 # compiler flags
-LFLAGS = -g -shared -Wl,-soname,lib$(PROJECT).so.$(VERSION_MAJOR) -o $(LIBRARY_PATH)/lib$(PROJECT).so.$(VERSION_MAJOR).$(VERSION_MINOR)
+LFLAGS = -g -shared -Wl,-soname,clib_$(PROJECT).so.$(VERSION_MAJOR) -o $(LIBRARY_PATH)/clib_$(PROJECT).so.$(VERSION_MAJOR).$(VERSION_MINOR)
 CFLAGS = -g -c -fPIC -Wall -pedantic -Wno-unknown-pragmas -Wno-variadic-macros $(INCLUDE_PARAMS)
 
 
@@ -59,7 +59,7 @@ $(PROJECT): $(OBJECTS)
 #
 
 clean:
-	rm *.o $(LIBRARY_PATH)/lib$(PROJECT).a
+	rm *.o $(LIBRARY_PATH)/clib_$(PROJECT).*
 
 
 #
@@ -67,7 +67,7 @@ clean:
 #
 
 static:
-	ar rcs $(LIBRARY_PATH)/lib$(PROJECT).a $(OBJECTS)
+	ar rcs $(LIBRARY_PATH)/clib_$(PROJECT).a $(OBJECTS)
 
 
 #
