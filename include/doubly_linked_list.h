@@ -113,6 +113,7 @@ DList* Duplicate_DList( DList *list );
 
 /**
  * @brief frees the memory of a DList segment
+ * WARNING: will not free the data in the DList
  *
  * @param seg the segment to free
  */
@@ -120,6 +121,7 @@ void Free_DList_Segment( DList *seg );
 
 /**
  * @brief frees the memory of an entire DList
+ * WARNING: will not free the data in the DList
  *
  * @param list a pointer to the DList pointer of the DList to free
  */

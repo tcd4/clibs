@@ -64,7 +64,9 @@ DList* Remove_DList_Segment( DList *list, DList *seg )
 	return temp;
     }
     
-    while( temp && ( temp->next != seg ) )
+    temp = list;
+
+    while( temp && temp->next && ( temp->next != seg ) )
     {
 	temp = temp->next;
     }
@@ -84,6 +86,8 @@ DList* Remove_From_DList( DList *list, dataptr rm, bool all )
     DList *temp;
 
     Return_Value_If_Fail( list, NULL );
+
+    temp = list;
 
     while( temp )
     {
@@ -146,23 +150,27 @@ DList* Duplicate_DList( DList *list )
 {
     DList *clone, *new, *prev;
 
+    clone = NULL;
+
     while( list )
     {
 	new = New_DList( list->data );
-	Return_Value_If_Fail( new, NULL );
-
-	if( clone )
+	if( !new )
 	{
-	    new->prev = prev;
-	    prev->next = new;
-	    prev = prev->next;
+	    Free_DList( &clone );
 	}
-	else
+
+	if( !clone )
 	{
 	    clone = new;
 	    prev = new;
 	}
-
+	else
+	{
+	    prev->next = new;
+	    prev = prev->next;
+	}
+      
 	list = list->next;
     }
 
@@ -174,7 +182,6 @@ void Free_DList_Segment( DList *seg )
 {
     Return_If_Fail( seg );
 
-    free( seg->data );
     free( seg );
 }
 

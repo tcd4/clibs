@@ -61,7 +61,9 @@ List* Remove_List_Segment( List *list, List *seg )
 	return temp;
     }
     
-    while( temp && ( temp->next != seg ) )
+    temp = list;
+
+    while( temp && temp->next && ( temp->next != seg ) )
     {
 	temp = temp->next;
     }
@@ -71,7 +73,7 @@ List* Remove_List_Segment( List *list, List *seg )
     temp->next = seg->next;
 
     Free_List_Segment( seg );
-
+   
     return list;
 }
 
@@ -81,6 +83,8 @@ List* Remove_From_List( List *list, dataptr rm, bool all )
     List *temp;
 
     Return_Value_If_Fail( list, NULL );
+
+    temp = list;
 
     while( temp )
     {
@@ -143,22 +147,27 @@ List* Duplicate_List( List *list )
 {
     List *clone, *new, *prev;
 
+    clone = NULL;
+
     while( list )
     {
 	new = New_List( list->data );
-	Return_Value_If_Fail( new, NULL );
-
-	if( clone )
+	if( !new )
 	{
-	    prev->next = new;
-	    prev = prev->next;
+	    Free_List( &clone );
 	}
-	else
+
+	if( !clone )
 	{
 	    clone = new;
 	    prev = new;
 	}
-
+	else
+	{
+	    prev->next = new;
+	    prev = prev->next;
+	}
+      
 	list = list->next;
     }
 
@@ -170,7 +179,6 @@ void Free_List_Segment( List *seg )
 {
     Return_If_Fail( seg );
 
-    free( seg->data );
     free( seg );
 }
 

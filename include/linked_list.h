@@ -132,6 +132,7 @@ List* Duplicate_List( List *list );
 
 /**
  * @brief frees the memory of a List segment
+ * WARNING: will not free the data in the List
  *
  * @param seg the segment to free
  */
@@ -139,6 +140,7 @@ void Free_List_Segment( List *seg );
 
 /**
  * @brief frees the memory of an entire List
+ * WARNING: will not free the data in the List
  *
  * @param list a pointer to the List pointer of the List to free
  */
