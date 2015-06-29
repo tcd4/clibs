@@ -1,46 +1,49 @@
-#include "linked_list.h"
+#include "doubly_linked_list.h"
 
 
-List* New_List()
+DList* New_DList()
 {
-    List *l;
+    DList *l;
 
-    l = C_New( List, 1 );
+    l = C_New( DList, 1 );
     Return_Value_If_Fail( l, NULL );
 
     l->data = NULL;
+    l->prev = NULL;
     l->next = NULL;
-
+    
     return l;
 }
 
 
-List* Append_To_List( List *list, dataptr data )
+DList* Append_To_DList( DList *list, dataptr data )
 {
-    List *end;
-    List *new;
+    DList *end;
+    DList *new;
 
     Return_Value_If_Fail( list, NULL );
 
-    new = New_List();
+    new = New_DList();
     Return_Value_If_Fail( new, NULL );
 
-    new->data = data;
+    end = End_Of_DList( list );
 
-    end = End_Of_List( list );
+    new->data = data;
+    new->prev = end;
+    
     end->next = new;
 
     return list;
 }
 
 
-List* Prepend_To_List( List *list, dataptr data )
+DList* Prepend_To_DList( DList *list, dataptr data )
 {
-    List *new;
+    DList *new;
 
     Return_Value_If_Fail( list, NULL );
 
-    new = New_List();
+    new = New_DList();
     Return_Value_If_Fail( new, NULL );
 
     new->data = data;
@@ -50,9 +53,9 @@ List* Prepend_To_List( List *list, dataptr data )
 }
 
 
-List* Remove_List_Segment( List *list, List *seg )
+DList* Remove_DList_Segment( DList *list, DList *seg )
 {
-    List *temp;
+    DList *temp;
 
     Return_Value_If_Fail( list, NULL );
     Return_Value_If_Fail( seg, list );
@@ -60,7 +63,7 @@ List* Remove_List_Segment( List *list, List *seg )
     if( list == seg )
     {
 	temp = list->next;
-	Free_List_Segment( list );
+	Free_DList_Segment( list );
 	return temp;
     }
     
@@ -73,15 +76,15 @@ List* Remove_List_Segment( List *list, List *seg )
 
     temp->next = seg->next;
 
-    Free_List_Segment( seg );
+    Free_DList_Segment( seg );
 
     return list;
 }
 
 
-List* Remove_From_List( List *list, dataptr rm, bool all )
+DList* Remove_From_DList( DList *list, dataptr rm, bool all )
 {
-    List *temp;
+    DList *temp;
 
     Return_Value_If_Fail( list, NULL );
 
@@ -89,7 +92,7 @@ List* Remove_From_List( List *list, dataptr rm, bool all )
     {
 	if( temp->data == rm )
 	{
-	    Remove_List_Segment( list, temp );
+	    Remove_DList_Segment( list, temp );
 	    
 	    if( !all ) break;
 	}
@@ -101,7 +104,7 @@ List* Remove_From_List( List *list, dataptr rm, bool all )
 }
 
 
-List* Find_In_List( List *list, dataptr data )
+DList* Find_In_DList( DList *list, dataptr data )
 {
     while( list )
     {
@@ -114,7 +117,7 @@ List* Find_In_List( List *list, dataptr data )
 }
 
 
-List* End_Of_List( List* list )
+DList* End_Of_DList( DList* list )
 {
     Return_Value_If_Fail( list, NULL );
 
@@ -127,7 +130,7 @@ List* End_Of_List( List* list )
 }
 
 
-uint64 Length_Of_List( List *list )
+uint64 Length_Of_DList( DList *list )
 {
     uint64 c = 0;
 
@@ -142,19 +145,20 @@ uint64 Length_Of_List( List *list )
 }
 
 
-List* Duplicate_List( List *list )
+DList* Duplicate_DList( DList *list )
 {
-    List *clone, *new, *prev;
+    DList *clone, *new, *prev;
 
     while( list )
     {
-	new = New_List();
+	new = New_DList();
 	Return_Value_If_Fail( new, NULL );
 
 	new->data = list->data;
 
 	if( clone )
 	{
+	    new->prev = prev;
 	    prev->next = new;
 	    prev = prev->next;
 	}
@@ -171,7 +175,7 @@ List* Duplicate_List( List *list )
 }
 
 
-void Free_List_Segment( List *seg )
+void Free_DList_Segment( DList *seg )
 {
     Return_If_Fail( seg );
 
@@ -180,9 +184,9 @@ void Free_List_Segment( List *seg )
 }
 
 
-void Free_List( List **list )
+void Free_DList( DList **list )
 {
-    List *temp, *next;
+    DList *temp, *next;
 
     Return_If_Fail( list );
     Return_If_Fail( *list );
@@ -192,7 +196,7 @@ void Free_List( List **list )
     while( temp )
     {
 	next = temp->next;
-	Free_List_Segment( temp );
+	Free_DList_Segment( temp );
 	temp = next;
     }
 
