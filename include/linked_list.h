@@ -26,9 +26,11 @@ typedef struct list_s
 /**
  * @brief initializes a new List
  *
+ * @param data the data the List is initialized with
+ *
  * @return a pointer to the new list or NULL on failure
  */
-List* New_List();
+List* New_List( dataptr data );
 
 /**
  * @brief appends data to a lLst

@@ -27,9 +27,11 @@ typedef struct dlist_s
 /**
  * @brief initializes a new DList
  *
+ * @param data the data the DList is initialized with
+ * 
  * @return a pointer to the new DList or NULL on failure
  */
-DList* New_DList();
+DList* New_DList( dataptr data );
 
 /**
  * @brief appends data to a lLst

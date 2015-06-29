@@ -1,14 +1,14 @@
 #include "doubly_linked_list.h"
 
 
-DList* New_DList()
+DList* New_DList( dataptr data )
 {
     DList *l;
 
     l = C_New( DList, 1 );
     Return_Value_If_Fail( l, NULL );
 
-    l->data = NULL;
+    l->data = data;
     l->prev = NULL;
     l->next = NULL;
     
@@ -23,14 +23,12 @@ DList* Append_To_DList( DList *list, dataptr data )
 
     Return_Value_If_Fail( list, NULL );
 
-    new = New_DList();
+    new = New_DList( data );
     Return_Value_If_Fail( new, NULL );
 
     end = End_Of_DList( list );
 
-    new->data = data;
     new->prev = end;
-    
     end->next = new;
 
     return list;
@@ -43,10 +41,9 @@ DList* Prepend_To_DList( DList *list, dataptr data )
 
     Return_Value_If_Fail( list, NULL );
 
-    new = New_DList();
+    new = New_DList( data );
     Return_Value_If_Fail( new, NULL );
 
-    new->data = data;
     new->next = list;
 
     return new;
@@ -151,10 +148,8 @@ DList* Duplicate_DList( DList *list )
 
     while( list )
     {
-	new = New_DList();
+	new = New_DList( list->data );
 	Return_Value_If_Fail( new, NULL );
-
-	new->data = list->data;
 
 	if( clone )
 	{

@@ -1,14 +1,14 @@
 #include "linked_list.h"
 
 
-List* New_List()
+List* New_List( dataptr data )
 {
     List *l;
 
     l = C_New( List, 1 );
     Return_Value_If_Fail( l, NULL );
 
-    l->data = NULL;
+    l->data = data;
     l->next = NULL;
 
     return l;
@@ -22,10 +22,8 @@ List* Append_To_List( List *list, dataptr data )
 
     Return_Value_If_Fail( list, NULL );
 
-    new = New_List();
+    new = New_List( data );
     Return_Value_If_Fail( new, NULL );
-
-    new->data = data;
 
     end = End_Of_List( list );
     end->next = new;
@@ -40,10 +38,9 @@ List* Prepend_To_List( List *list, dataptr data )
 
     Return_Value_If_Fail( list, NULL );
 
-    new = New_List();
+    new = New_List( data );
     Return_Value_If_Fail( new, NULL );
 
-    new->data = data;
     new->next = list;
 
     return new;
@@ -148,10 +145,8 @@ List* Duplicate_List( List *list )
 
     while( list )
     {
-	new = New_List();
+	new = New_List( list->data );
 	Return_Value_If_Fail( new, NULL );
-
-	new->data = list->data;
 
 	if( clone )
 	{
