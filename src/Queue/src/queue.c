@@ -23,9 +23,8 @@ void Push_Queue( Queue *queue, dataptr data )
 
     if( !queue->head )
     {
-	new = New_List();
+	new = New_List( data );
 	Return_If_Fail( new );
-	new->data = data;
     }
     else
     {
@@ -66,7 +65,7 @@ void Clear_Queue( Queue *queue )
 bool Queue_Is_Empty( Queue *queue )
 {
     Return_Value_If_Fail( queue, FALSE );
-    Return_Value_If_Fail( queue->head, FALSE );
+    Return_Value_If_Fail( !queue->head, FALSE );
     return TRUE;
 }
 

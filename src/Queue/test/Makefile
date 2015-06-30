@@ -27,7 +27,7 @@ PROJECT = test
 CC = gcc
 
 # libraries
-CLIB_LIBRARIES = clib_List.a clib_Queue.a
+CLIB_LIBRARIES = clib_Queue.a clib_List.a
 CLIB_PATH = ../../../libs
 
 # includes

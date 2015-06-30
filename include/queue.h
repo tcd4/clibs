@@ -9,7 +9,7 @@
 #define __QUEUE__
 
 
-#include "linked_list.h"
+#include <linked_list.h>
 #include "macros.h"
 #include "basics.h"
 

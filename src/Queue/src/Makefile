@@ -36,6 +36,7 @@ CC = gcc
 
 # library
 LIBRARY_PATH = ../../../libs
+CLIB_LIBRARIES = clib_List.a
 
 # includes
 INCLUDE_PATHS = ../../../include
@@ -44,14 +45,14 @@ INCLUDE_PARAMS = $(foreach d, $(INCLUDE_PATHS), -I$d)
 # compiler flags
 LFLAGS = -g -shared -Wl,-soname,clib_$(PROJECT).so.$(VERSION_MAJOR) -o $(LIBRARY_PATH)/clib_$(PROJECT).so.$(VERSION_MAJOR).$(VERSION_MINOR)
 CFLAGS = -g -c -fPIC -Wall -pedantic -Wno-unknown-pragmas -Wno-variadic-macros $(INCLUDE_PARAMS)
-
+CLIB_LDFLAGS = $(foreach d, $(CLIB_LIBRARIES), $(LIBRARY_PATH)/$d)
 
 #
 # Compiling
 #
 
 $(PROJECT): $(OBJECTS)
-	$(CC) $(OBJECTS) $(LFLAGS)
+	$(CC) $(OBJECTS) $(LFLAGS) $(CLIB_LDFLAGS)
 
 
 #
