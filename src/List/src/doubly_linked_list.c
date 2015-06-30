@@ -3,16 +3,16 @@
 
 DList* New_DList( dataptr data )
 {
-    DList *l;
+    DList *new;
 
-    l = C_New( DList, 1 );
-    Return_Value_If_Fail( l, NULL );
+    new = C_New( DList, 1 );
+    Return_Value_If_Fail( new, NULL );
 
-    l->data = data;
-    l->prev = NULL;
-    l->next = NULL;
+    new->data = data;
+    new->prev = NULL;
+    new->next = NULL;
     
-    return l;
+    return new;
 }
 
 
@@ -182,6 +182,7 @@ void Free_DList_Segment( DList *seg )
 {
     Return_If_Fail( seg );
 
+    free( seg->data );
     free( seg );
 }
 

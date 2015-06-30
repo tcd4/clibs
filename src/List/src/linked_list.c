@@ -3,15 +3,15 @@
 
 List* New_List( dataptr data )
 {
-    List *l;
+    List *new;
 
-    l = C_New( List, 1 );
-    Return_Value_If_Fail( l, NULL );
+    new = C_New( List, 1 );
+    Return_Value_If_Fail( new, NULL );
 
-    l->data = data;
-    l->next = NULL;
+    new->data = data;
+    new->next = NULL;
 
-    return l;
+    return new;
 }
 
 
@@ -179,6 +179,7 @@ void Free_List_Segment( List *seg )
 {
     Return_If_Fail( seg );
 
+    free( seg->data );
     free( seg );
 }
 
